@@ -31,7 +31,7 @@ RUN git clone https://github.com/stevenlovegrove/Pangolin.git && \
 
 RUN mkdir -p catkin_ws/src && \
     cd catkin_ws/src && \
-    git clone https://github.com/thien94/orb_slam3_ros.git && \
+    git clone https://github.com/jongwonjlee/orb_slam3_ros.git && \
     cd .. && \
     catkin config \
       --extend /opt/ros/noetic && \
@@ -40,19 +40,34 @@ RUN mkdir -p catkin_ws/src && \
 RUN echo "source /root/catkin_ws/devel/setup.bash" >> /root/.bashrc
 
 #
+# install Python
+#
+RUN apt-get update && \
+    apt-get install -y python3 python3-pip
+RUN pip3 install --upgrade python-dateutil
+
+#
+# install Evo for ATE evluation
+#
+RUN git clone https://github.com/jongwonjlee/evo.git && \
+    cd evo && \
+    pip3 install --editable . --upgrade --no-binary evo
+
+#
 # install RealSenseSDK / RealSense ROS wrapper
 #
-
-RUN apt-key adv --keyserver keyserver.ubuntu.com --recv-key F6E65AC044F831AC80A06380C8B3A55A6F3EFCDE || apt-key adv --keyserver hkp://keyserver.ubuntu.com:80 --recv-key F6E65AC044F831AC80A06380C8B3A55A6F3EFCDE
-RUN add-apt-repository "deb https://librealsense.intel.com/Debian/apt-repo $(lsb_release -sc) main"
-
-RUN apt-get update && \
-    apt-get install -y --no-install-recommends \
-        libssl-dev \
-        libudev-dev \
-        libusb-1.0-0-dev \
-        librealsense2-dev \
-        librealsense2-utils \
-        ros-${ROS_DISTRO}-realsense2-camera &&  \
-    rm -rf /var/lib/apt/lists/* && \
-    apt-get clean
+# 
+# RUN apt-key adv --keyserver keyserver.ubuntu.com --recv-key F6E65AC044F831AC80A06380C8B3A55A6F3EFCDE || apt-key adv --keyserver hkp://keyserver.ubuntu.com:80 --recv-key F6E65AC044F831AC80A06380C8B3A55A6F3EFCDE
+# RUN add-apt-repository "deb https://librealsense.intel.com/Debian/apt-repo $(lsb_release -sc) main"
+# 
+# RUN apt-get update && \
+#     apt-get install -y --no-install-recommends \
+#         libssl-dev \
+#         libudev-dev \
+#         libusb-1.0-0-dev \
+#         librealsense2-dev \
+#         librealsense2-utils \
+#         ros-${ROS_DISTRO}-realsense2-camera &&  \
+#     rm -rf /var/lib/apt/lists/* && \
+#     apt-get clean
+# 
