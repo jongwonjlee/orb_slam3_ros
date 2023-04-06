@@ -5,6 +5,7 @@ sudo ldconfig
 
 # set the path to the directory containing the files
 file_dir="/data"
+# file_dir="/media/jlee/T7/MagPIE2/Mar24"
 # set the name of the sequence of interest
 sequence_name="magpie2Dataset_loc000"
 # create a variable to hold the full path to the source directory
@@ -39,4 +40,4 @@ kill $record_pid
 rosnode kill --all
 
 # run evo to get APE results
-evo_ape bag ${dst_dir} /mocap/posestamped /orb_slam3/camera_pose -av > "${file_dir}/${sequence_name}.txt"
+evo_ape bag ${dst_dir} /mocap/posestamped /orb_slam3/camera_pose -av 2>&1 | tee "${file_dir}/${sequence_name}.txt"
