@@ -7,7 +7,7 @@ File.version: "1.0"
 
 Camera.type: "PinHole"
 
-System.SaveAtlasToFile: "map_apr3"
+# System.SaveAtlasToFile: "map"
 # System.LoadAtlasFromFile: "map"
 
 # Right Camera calibration and distortion parameters (OpenCV)
