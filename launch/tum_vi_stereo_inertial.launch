@@ -9,7 +9,7 @@
         <remap from="/imu"                      to="/imu0"/>
 
         <!-- Parameters for original ORB-SLAM3 -->
-        <param name="voc_file"      type="string" value="$(find orb_slam3_ros)/orb_slam3/Vocabulary/ORBvoc.txt.bin"/>
+        <param name="voc_file"      type="string" value="$(find orb_slam3_ros)/orb_slam3/Vocabulary/ORBvoc.txt"/>
         <param name="settings_file" type="string" value="$(find orb_slam3_ros)/config/Stereo-Inertial/TUM-VI.yaml"/>
 
         <!-- Parameters for ROS -->
