@@ -7,19 +7,19 @@ File.version: "1.0"
 
 Camera.type: "PinHole"
 
-# System.SaveAtlasToFile: "map"
-# System.LoadAtlasFromFile: "map"
+# System.LoadAtlasFromFile: "apr06"
+# System.SaveAtlasToFile: "apr06-000"
 
 # Right Camera calibration and distortion parameters (OpenCV)
-Camera1.fx: 923.848388671875
-Camera1.fy: 923.85546875
-Camera1.cx: 647.532470703125
-Camera1.cy: 361.49072265625
+Camera1.fx: 916.54401376
+Camera1.fy: 915.71196962
+Camera1.cx: 648.78345706
+Camera1.cy: 356.95391797
 # distortion parameters
-Camera1.k1: 0.00
-Camera1.k2: 0.00
-Camera1.p1: 0.00
-Camera1.p2: 0.00
+Camera1.k1:  0.08396047
+Camera1.k2: -0.16045652
+Camera1.p1: -0.00129337
+Camera1.p2:  0.00043376
 
 # Camera resolution
 Camera.width: 1280
@@ -43,27 +43,31 @@ IMU.T_b_c1: !!opencv-matrix
    rows: 4
    cols: 4
    dt: f
-   data : [ 9.999220e-01, -8.723500e-03,  8.910490e-03,  2.050551e-02,
-            8.718580e-03,  9.999620e-01,  5.914740e-04, -4.696043e-03,
-           -8.915310e-03, -5.137420e-04,  9.999600e-01, -1.174969e-02,
-            0.000000e+00,  0.000000e+00,  0.000000e+00,  1.000000e+00]
+   data : [ 9.99868137e-01,  1.38427038e-02, -8.49041771e-03, -2.01351767e-02,
+           -1.37996139e-02,  9.99891709e-01,  5.11287934e-03,  8.43080000e-04,
+            8.56027435e-03, -4.99504066e-03,  9.99950884e-01,  1.88084567e-02,
+            0.00000000e+00,  0.00000000e+00,  0.00000000e+00,  1.00000000e+00]
+#    data : [1, 0, 0, -0.005,
+#            0, 1, 0, -0.005,
+#            0, 0, 1,  0.0117,
+#            0, 0, 0, 1]   
 
 
 # Do not insert KFs when recently lost
 IMU.InsertKFsWhenLost: 1
 
 # IMU noise (Use those from VINS-mono)
-IMU.NoiseGyro: 1e-3 # 5e-4 # rad/s^0.5
-IMU.NoiseAcc: 1e-2 # 5e-3 # m/s^1.5
-IMU.GyroWalk: 1e-4 # 5e-5 rad/s^1.5
-IMU.AccWalk: 1e-3 # 5e-4 m/s^2.5
+IMU.NoiseGyro: 5e-4 # rad/s^0.5
+IMU.NoiseAcc: 5e-3 # m/s^1.5
+IMU.GyroWalk: 5e-5 # rad/s^1.5
+IMU.AccWalk: 5e-4 # m/s^2.5
 IMU.Frequency: 200.0
 
 #--------------------------------------------------------------------------------------------
 # ORB Parameters
 #--------------------------------------------------------------------------------------------
 # ORB Extractor: Number of features per image
-ORBextractor.nFeatures: 2500
+ORBextractor.nFeatures: 3000
 
 # ORB Extractor: Scale factor between levels in the scale pyramid 	
 ORBextractor.scaleFactor: 1.2

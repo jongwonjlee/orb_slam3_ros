@@ -20,62 +20,78 @@ File.version: "1.0"
 Camera.type: "PinHole"
 
 # Camera calibration and distortion parameters (OpenCV) 
-Camera1.fx: 458.87097777
-Camera1.fy: 457.56563976
-Camera1.cx: 366.70497994 
-Camera1.cy: 248.64953167
+Camera1.fx: 2408.958299019289
+Camera1.fy: 2407.4108025855985
+Camera1.cx: 1217.202129402266
+Camera1.cy: 1008.0805056355936
 
-Camera1.k1: -0.28851931
-Camera1.k2: 0.07861832
-Camera1.p1: 0.00030324
-Camera1.p2: 0.00009689
+Camera1.k1: -0.10578994519289313
+Camera1.k2: 0.09422229142179946
+Camera1.p1: 0.0013657551176135007
+Camera1.p2: 0.0014318564547443212
 
-Camera2.fx: 457.64591758
-Camera2.fy: 456.24457518
-Camera2.cx: 379.11882876
-Camera2.cy: 255.51612282
+# Camera1.fx: 3493.6531503066567
+# Camera1.fy: 3487.2085061501566
+# Camera1.cx: 1994.2867290363158
+# Camera1.cy: 1505.339855883075
+# 
+# Camera1.k1: -0.16223553731814372
+# Camera1.k2: 0.15957995458066512
+# Camera1.p1: -0.0006589441811486555
+# Camera1.p2: -0.00225067440852858
 
-Camera2.k1: -0.2861971
-Camera2.k2: 0.07641747
-Camera2.p1: 0.00004049
-Camera2.p2: 0.00004536
+# Camera1.width: 2448
+# Camera1.height: 2048
+# 
+# Camera2.width: 4096
+# Camera2.height: 3000
 
-Camera.width: 752
-Camera.height: 480
+Camera.width: 2448
+Camera.height: 2048
 
 # Camera frames per second 
-Camera.fps: 20
+Camera.fps: 6
 
 # Color order of the images (0: BGR, 1: RGB. It is ignored if images are grayscale)
 Camera.RGB: 1
 
 # Close/Far threshold. Baseline times.
-Stereo.ThDepth: 60.0
+# Stereo.ThDepth: 60.0
 Stereo.T_c1_c2: !!opencv-matrix
   rows: 4
   cols: 4
   dt: f
-  data: [0.999997256477797,-0.002317135723275,-0.000343393120620,0.110074137800478,
-         0.002312067192432,0.999898048507103,-0.014090668452683,-0.000156612054392,
-         0.000376008102320,0.014089835846691,0.999900662638081,0.000889382785432,
-         0,0,0,1.000000000000000]
+  data: [-0.6859657 ,  0.00162735,  0.72763206,  0.02162638,
+         -0.01112346, -0.9999041 , -0.00825022,  0.15438753,
+          0.72754885, -0.01375315,  0.68591801, -0.05074615,
+          0.        ,  0.        ,  0.        ,  1.        ]
 
-# Transformation from camera 0 to body-frame (imu)
+# Transformation from camera 1 to body-frame (imu)
 IMU.T_b_c1: !!opencv-matrix
   rows: 4
   cols: 4
   dt: f
-  data: [0.01495464, -0.99988551,  0.00230604, -0.01680365,
-         0.99965307,  0.0150011 ,  0.02164974, -0.0683704 ,
-        -0.02168186,  0.00198148,  0.99976296,  0.00448563,
-         0.        ,  0.        ,  0.        ,  1.        ]
+  data: [ 9.999037e-01,  2.660697e-03, -1.361876e-02, -1.026700e-02,
+          2.651117e-03, -9.999962e-01, -7.214026e-04,  9.724500e-02,
+         -1.362063e-02,  6.852282e-04, -9.999070e-01, -1.914182e-01,
+          0.000000e+00,  0.000000e+00,  0.000000e+00,  1.000000e+00]
+
+# Transformation from camera 2 to body-frame (imu)
+# IMU.T_b_c1: !!opencv-matrix
+#   rows: 4
+#   cols: 4
+#   dt: f
+#   data: [-6.958376e-01, -8.459513e-04,  7.181987e-01,  1.245917e-02,
+#           8.779987e-03,  9.999146e-01,  9.684400e-03, -5.704800e-02,
+#          -7.181455e-01,  1.304454e-02, -6.957707e-01, -1.408656e-01,
+#           0.000000e+00,  0.000000e+00,  0.000000e+00,  1.000000e+00]
 
 # IMU noise
-IMU.NoiseGyro: 1.7e-04 # 1.6968e-04
-IMU.NoiseAcc: 2.0e-03 # 2.0000e-3
-IMU.GyroWalk: 1.9393e-05
-IMU.AccWalk: 3.e-03 # 3.0000e-3
-IMU.Frequency: 200.0
+IMU.NoiseGyro: 6.5e-4
+IMU.NoiseAcc: 6.0e-3
+IMU.GyroWalk: 5.6e-4
+IMU.AccWalk: 6.3e-4
+IMU.Frequency: 400.0
 
 #--------------------------------------------------------------------------------------------
 # ORB Parameters
@@ -94,8 +110,8 @@ ORBextractor.nLevels: 8
 # Image is divided in a grid. At each cell FAST are extracted imposing a minimum response.
 # Firstly we impose iniThFAST. If no corners are detected we impose a lower value minThFAST
 # You can lower these values if your images have low contrast			
-ORBextractor.iniThFAST: 20
-ORBextractor.minThFAST: 7
+ORBextractor.iniThFAST: 10
+ORBextractor.minThFAST: 3
 
 #--------------------------------------------------------------------------------------------
 # Viewer Parameters

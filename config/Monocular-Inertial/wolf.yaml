@@ -7,48 +7,59 @@ File.version: "1.0"
 
 Camera.type: "PinHole"
 
-# System.SaveAtlasToFile: "map"
-# System.LoadAtlasFromFile: "map"
+# Camera calibration and distortion parameters (OpenCV) 
+Camera1.fx: 640
+Camera1.fy: 480
+Camera1.cx: 320
+Camera1.cy: 240
 
-# Right Camera calibration and distortion parameters (OpenCV)
-Camera1.fx: 916.54401376
-Camera1.fy: 915.71196962
-Camera1.cx: 648.78345706
-Camera1.cy: 356.95391797
-# distortion parameters
-Camera1.k1:  0.08396047
-Camera1.k2: -0.16045652
-Camera1.p1: -0.00129337
-Camera1.p2:  0.00043376
+Camera1.k1: 0
+Camera1.k2: 0
+Camera1.p1: 0
+Camera1.p2: 0
 
 # Camera resolution
-Camera.width: 1280
-Camera.height: 720
+Camera.width: 640
+Camera.height: 480
+
+Camera.newWidth: 640
+Camera.newHeight: 480
 
 # Camera frames per second 
-Camera.fps: 30
+Camera.fps: 15
 
 # Color order of the images (0: BGR, 1: RGB. It is ignored if images are grayscale)
 Camera.RGB: 1
 
-Stereo.ThDepth: 10.0
-Stereo.b: 0.0745
+# Transformation from camera to body-frame (imu)
+IMU.T_b_c1: !!opencv-matrix
+   rows: 4
+   cols: 4
+   dt: f
+   data: [1, 0, 0, 0,
+          0, 1, 0, 0,
+          0, 0, 1, 0,
+          0, 0, 0, 1]
 
-# Depth map values factor
-# System.thFarPoints: 10.0
-RGBD.DepthMapFactor: 1000.0
+# IMU noise
+IMU.NoiseGyro: 0.03
+IMU.NoiseAcc: 0.02
+IMU.GyroWalk: 0.0001
+IMU.AccWalk: 0.0001
+IMU.Frequency: 150
 
 #--------------------------------------------------------------------------------------------
 # ORB Parameters
 #--------------------------------------------------------------------------------------------
+
 # ORB Extractor: Number of features per image
-ORBextractor.nFeatures: 2500
+ORBextractor.nFeatures: 100 # 1000
 
 # ORB Extractor: Scale factor between levels in the scale pyramid 	
 ORBextractor.scaleFactor: 1.2
 
 # ORB Extractor: Number of levels in the scale pyramid	
-ORBextractor.nLevels: 16
+ORBextractor.nLevels: 4
 
 # ORB Extractor: Fast threshold
 # Image is divided in a grid. At each cell FAST are extracted imposing a minimum response.
@@ -67,6 +78,7 @@ Viewer.PointSize: 2.0
 Viewer.CameraSize: 0.08
 Viewer.CameraLineWidth: 3.0
 Viewer.ViewpointX: 0.0
-Viewer.ViewpointY: -0.7
-Viewer.ViewpointZ: -3.5
-Viewer.ViewpointF: 500.0
+Viewer.ViewpointY: -1.7
+Viewer.ViewpointZ: 0.8
+Viewer.ViewpointF: -500.0
+

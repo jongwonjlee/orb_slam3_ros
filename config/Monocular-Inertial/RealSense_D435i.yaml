@@ -7,21 +7,26 @@ File.version: "1.0"
 
 Camera.type: "PinHole"
 
-# Right Camera calibration and distortion parameters (OpenCV)
-Camera1.fx: 382.613
-Camera1.fy: 382.613
-Camera1.cx: 320.183
-Camera1.cy: 236.455
+# System.LoadAtlasFromFile: "apr06"
+# System.SaveAtlasToFile: "apr06-000"
 
+# Right Camera calibration and distortion parameters (OpenCV)
+Camera1.fx: 916.54401376
+Camera1.fy: 915.71196962
+Camera1.cx: 648.78345706
+Camera1.cy: 356.95391797
 # distortion parameters
-Camera1.k1: 0.0
-Camera1.k2: 0.0
-Camera1.p1: 0.0
-Camera1.p2: 0.0
+Camera1.k1: 0.08396047
+Camera1.k2: -0.16045652
+Camera1.p1: -0.00129337
+Camera1.p2: 0.00043376
 
 # Camera resolution
-Camera.width: 640
-Camera.height: 480
+Camera.width: 1280
+Camera.height: 720
+
+Camera.newWidth: 1280
+Camera.newHeight: 720
 
 # Camera frames per second 
 Camera.fps: 30
@@ -34,26 +39,31 @@ IMU.T_b_c1: !!opencv-matrix
    rows: 4
    cols: 4
    dt: f
-   data: [1,0,0,-0.005,
-         0,1,0,-0.005,
-         0,0,1,0.0117,
-         0.0, 0.0, 0.0, 1.0]
+   data : [ 9.99868137e-01,  1.38427038e-02, -8.49041771e-03, -2.01351767e-02,
+           -1.37996139e-02,  9.99891709e-01,  5.11287934e-03,  8.43080000e-04,
+            8.56027435e-03, -4.99504066e-03,  9.99950884e-01,  1.88084567e-02,
+            0.00000000e+00,  0.00000000e+00,  0.00000000e+00,  1.00000000e+00]
+#    data : [1, 0, 0, -0.005,
+#            0, 1, 0, -0.005,
+#            0, 0, 1,  0.0117,
+#            0, 0, 0, 1]   
+
 
 # Do not insert KFs when recently lost
-IMU.InsertKFsWhenLost: 0
+# IMU.InsertKFsWhenLost: 1
 
 # IMU noise (Use those from VINS-mono)
-IMU.NoiseGyro: 1e-3 # 2.44e-4 #1e-3 # rad/s^0.5
-IMU.NoiseAcc: 1e-2 # 1.47e-3 #1e-2 # m/s^1.5
-IMU.GyroWalk: 1e-6 # rad/s^1.5
-IMU.AccWalk: 1e-4 # m/s^2.5
+IMU.NoiseGyro: 5e-4 # rad/s^0.5
+IMU.NoiseAcc: 5e-3 # m/s^1.5
+IMU.GyroWalk: 5e-5 # rad/s^1.5
+IMU.AccWalk: 5e-4 # m/s^2.5
 IMU.Frequency: 200.0
 
 #--------------------------------------------------------------------------------------------
 # ORB Parameters
 #--------------------------------------------------------------------------------------------
 # ORB Extractor: Number of features per image
-ORBextractor.nFeatures: 1250
+ORBextractor.nFeatures: 1000
 
 # ORB Extractor: Scale factor between levels in the scale pyramid 	
 ORBextractor.scaleFactor: 1.2
@@ -65,8 +75,8 @@ ORBextractor.nLevels: 8
 # Image is divided in a grid. At each cell FAST are extracted imposing a minimum response.
 # Firstly we impose iniThFAST. If no corners are detected we impose a lower value minThFAST
 # You can lower these values if your images have low contrast			
-ORBextractor.iniThFAST: 20
-ORBextractor.minThFAST: 7
+ORBextractor.iniThFAST: 10
+ORBextractor.minThFAST: 5
 
 #--------------------------------------------------------------------------------------------
 # Viewer Parameters
