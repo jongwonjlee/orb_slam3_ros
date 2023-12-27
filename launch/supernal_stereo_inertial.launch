@@ -2,15 +2,15 @@
     <param name="use_sim_time" value="false" />
 
     <!-- Main node -->
-    <node name="orb_slam3" pkg="orb_slam3_ros" type="ros_rgbd_inertial" output="screen">
+    <node name="orb_slam3" pkg="orb_slam3_ros" type="ros_stereo_inertial" output="screen">
         <!-- change the topics according to the dataset -->
-        <remap from="/camera/rgb/image_raw"                 to="/camera/color/image_raw"/>
-        <remap from="/camera/depth_registered/image_raw"    to="/camera/aligned_depth_to_color/image_raw"/>
-        <remap from="/imu"                                  to="/camera/imu"/>
+        <remap from="/camera/left/image_raw"    to="/primary/image_raw"/>
+        <remap from="/camera/right/image_raw"   to="/secondary/image_raw"/>
+        <remap from="/imu"                      to="/dji_osdk_ros/imu"/>
 
         <!-- Parameters for original ORB-SLAM3 -->
         <param name="voc_file"      type="string" value="$(find orb_slam3_ros)/orb_slam3/Vocabulary/ORBvoc.txt.bin"/>
-        <param name="settings_file" type="string" value="$(find orb_slam3_ros)/config/RGB-D-Inertial/RealSense_D435i.yaml"/>
+        <param name="settings_file" type="string" value="$(find orb_slam3_ros)/config/Stereo-Inertial/supernal.yaml"/>
 
         <!-- Parameters for ROS -->
         <param name="world_frame_id"    type="string"   value="world" />
@@ -20,7 +20,7 @@
     </node>
     
     <!-- Visualization -->
-    <node name="rviz" pkg="rviz" type="rviz" args="-d $(find orb_slam3_ros)/config/orb_slam3_rgbd.rviz" output="screen" />
+    <node name="rviz" pkg="rviz" type="rviz" args="-d $(find orb_slam3_ros)/config/orb_slam3_with_imu.rviz" output="screen" />
     
     <!-- Trajectory path -->
     <!--
