@@ -109,50 +109,42 @@ cv::Mat ImageGrabber::GetImage(const sensor_msgs::ImageConstPtr &img_msg)
     cv_bridge::CvImageConstPtr cv_ptr;
     try
     {
-        cv_ptr = cv_bridge::toCvShare(img_msg, sensor_msgs::image_encodings::MONO8);
+        cv_ptr = cv_bridge::toCvShare(img_msg);
     }
     catch (cv_bridge::Exception& e)
     {
         ROS_ERROR("cv_bridge exception: %s", e.what());
     }
     
-    if(cv_ptr->image.type()==0)
-    {
-        return cv_ptr->image.clone();
-    }
-    else
-    {
-        std::cout << "Error type" << std::endl;
-        return cv_ptr->image.clone();
-    }
+    return cv_ptr->image.clone();
 }
 
 void ImageGrabber::SyncWithImu()
 {
     while(1)
     {
-        if (!img0Buf.empty()&&!mpImuGb->imuBuf.empty())
+        if (!img0Buf.empty() && !mpImuGb->imuBuf.empty())
         {
             cv::Mat im;
             double tIm = 0;
 
             tIm = img0Buf.front()->header.stamp.toSec();
-            if(tIm>mpImuGb->imuBuf.back()->header.stamp.toSec())
+            if (tIm > mpImuGb->imuBuf.back()->header.stamp.toSec())
                 continue;
             
             this->mBufMutex.lock();
-            im = GetImage(img0Buf.front());
             ros::Time msg_time = img0Buf.front()->header.stamp;
+            im = GetImage(img0Buf.front());
             img0Buf.pop();
             this->mBufMutex.unlock();
 
             vector<ORB_SLAM3::IMU::Point> vImuMeas;
+            vImuMeas.clear();
             Eigen::Vector3f Wbb;
             mpImuGb->mBufMutex.lock();
             if (!mpImuGb->imuBuf.empty())
             {
                 // Load imu measurements from buffer
-                vImuMeas.clear();
                 while(!mpImuGb->imuBuf.empty() && mpImuGb->imuBuf.front()->header.stamp.toSec() <= tIm)
                 {
                     double t = mpImuGb->imuBuf.front()->header.stamp.toSec();
